@@ -1,0 +1,42 @@
+<html t:type="layout" title="tapestry-spring Index"
+      t:sidebarTitle="Framework Version"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+      xmlns:p="tapestry:parameter">
+        <!-- Most of the page content, including <head>, <body>, etc. tags, comes from Layout.tml -->
+
+    <p>${message:greeting}</p>
+
+    <p>The current time is: <strong>${currentTime}</strong></p>
+
+    <!-- A Zone is a component that can be updated in place, triggered by other components. -->
+    <t:zone t:id="zone">
+
+        <p>
+            [
+            <t:actionlink t:id="increment">create new person</t:actionlink>
+            ]
+            &nbsp;
+            [
+            <t:actionlink t:id="incrementAjax" zone="^">create new person (via Ajax)</t:actionlink>
+            ]
+        </p>
+
+    </t:zone>
+
+    <p:sidebar>
+        <p>
+            You are running Tapestry version <strong>${tapestryVersion}</strong>.
+        </p>
+	<p>SpringContext: ${springContext.DisplayName}</p>  springContext.get
+
+<p>SpringEnvironment: ${springContext.Environment}</p>  
+
+<p>ProductionMode from SpringBean: ${springBean.ProductionMode}</p>  
+        <p>
+            [
+            <t:pagelink page="Index">refresh page</t:pagelink>
+            ]
+        </p>
+    </p:sidebar>
+
+</html>
