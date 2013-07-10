@@ -40,4 +40,6 @@
     <constructor-arg name="databaseName" value="spring-test"/>
   </bean>
 
+ <mongo:repositories base-package="de.kersten.tapestryspring.services.data" />
+ 
 </beans>

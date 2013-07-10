@@ -15,6 +15,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import de.kersten.tapestryspring.domain.Account;
 import de.kersten.tapestryspring.domain.Address;
 import de.kersten.tapestryspring.domain.Person;
+import de.kersten.tapestryspring.services.data.PersonRepository;
 import de.kersten.tapestryspring.spring.ExampleSpringBean;
 
 /**
@@ -44,6 +45,9 @@ public class Index {
     @Inject
     private MongoTemplate mongoTemplate;
 
+    @Inject
+    private PersonRepository personRepository;
+
     public Date getCurrentTime() {
         return new Date();
     }
@@ -60,7 +64,7 @@ public class Index {
         // no cascading saves supported
         p.setAccount(account);
         mongoTemplate.save(p);
-        alertManager.info("person with ID " + p.getId() + " created, number of persons = " + countPersons());
+        alertManager.info("person with ID " + p.getId() + " created with mongoTemplate, number of persons = " + countPersons());
 
     }
 
@@ -69,8 +73,8 @@ public class Index {
         final Address a = new Address();
         a.setCity("nowhere");
         p.setAddress(a);
-        mongoTemplate.save(p);
-        alertManager.info("person with ID " + p.getId() + " created (via Ajax) number of persons = " + countPersons());
+        personRepository.save(p);
+        alertManager.info("person with ID " + p.getId() + " created with personRepository (via Ajax) number of persons = " + countPersons());
 
         return zone;
     }
